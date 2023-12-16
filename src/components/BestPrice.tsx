@@ -22,7 +22,7 @@ const Item = ({name, weight, price, image}: ProductProps) => (
   </View>
 );
 
-const BestPrice = () => {
+const BestPrice: React.FC = () => {
   return (
     <View style={styles.container}>
       <FlatList

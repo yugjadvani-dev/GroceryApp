@@ -1,12 +1,13 @@
-import {StyleSheet, Text, TextInput, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {color, fontFamily, fontSize} from '../assets/styles/GlobalStyles';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import {Image} from 'react-native';
 import CategoryList from '../components/CategoryList';
 import BestPrice from '../components/BestPrice';
+import Search from '../components/Search';
 
-const Home = () => {
+const Home: React.FC = () => {
   return (
     <View style={styles.container}>
       <View style={styles.listHead}>
@@ -23,15 +24,7 @@ const Home = () => {
       </View>
 
       {/* Search Input */}
-      <View style={styles.flex}>
-        <View style={styles.searchContainerStyle}>
-          <Icon name="search" size={16} color="#573B004D" />
-          <TextInput style={styles.searchFiled} placeholder="Search" />
-        </View>
-        <View style={[styles.notificationIcon, styles.notificationIconBg]}>
-          <Icon name="filter" size={16} color="#EEBB4D" />
-        </View>
-      </View>
+      <Search />
 
       {/* Category */}
       <View style={styles.listHead}>
@@ -65,12 +58,6 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 15,
   },
-  flex: {
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    flexDirection: 'row',
-    marginVertical: 15,
-  },
   helloText: {
     color: '#3D3014',
     fontFamily: fontFamily.montserrat,
@@ -101,24 +88,7 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
   },
-  notificationIconBg: {
-    backgroundColor: '#fcf9e8',
-  },
-  searchContainerStyle: {
-    backgroundColor: '#fdfdf9',
-    borderRadius: 15,
-    height: 40,
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 14,
-    width: '85%',
-    borderColor: '#F0E9D2',
-    borderWidth: 1,
-  },
-  searchFiled: {
-    paddingLeft: 17,
-    placeholderTextColor: '#e5e1d6',
-  },
+
   listHead: {
     marginBottom: 10,
     alignItems: 'center',
