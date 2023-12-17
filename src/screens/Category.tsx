@@ -39,46 +39,56 @@ const Category: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <Search />
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        style={styles.ScrollViewFlex}>
+        <Search />
 
-      <ScrollView horizontal={true}>
-        {categoryTypes.map(item => (
-          <TouchableOpacity
-            key={item}
-            onPress={() => setSelectedCategory(item)}>
-            <View style={styles.wrapper}>
-              <Text
-                style={[
-                  styles.category,
-                  item === selectedCategory && styles.active,
-                ]}>
-                {item}
-              </Text>
-              {item === selectedCategory && <View style={styles.activeDots} />}
-            </View>
-          </TouchableOpacity>
-        ))}
+        <ScrollView horizontal={true}>
+          {categoryTypes.map(item => (
+            <TouchableOpacity
+              key={item}
+              onPress={() => setSelectedCategory(item)}>
+              <View style={styles.wrapper}>
+                <Text
+                  style={[
+                    styles.category,
+                    item === selectedCategory && styles.active,
+                  ]}>
+                  {item}
+                </Text>
+                {item === selectedCategory && (
+                  <View style={styles.activeDots} />
+                )}
+              </View>
+            </TouchableOpacity>
+          ))}
+        </ScrollView>
+
+        <View style={styles.cardContainer}>
+          <FlatList
+            numColumns={2}
+            data={filteredCategoryList}
+            keyExtractor={item => item.id}
+            renderItem={({item}) => <Item {...item} />}
+          />
+        </View>
       </ScrollView>
-
-      <View style={styles.cardContainer}>
-        <FlatList
-          numColumns={2}
-          data={filteredCategoryList}
-          keyExtractor={item => item.id}
-          renderItem={({item}) => <Item {...item} />}
-        />
-      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  ScrollViewFlex: {
+    flexGrow: 1,
+  },
   container: {
     backgroundColor: color.colorWhite,
     flex: 1,
     padding: 15,
   },
   cardContainer: {
+    marginTop: 10,
     justifyContent: 'space-between',
   },
   category: {

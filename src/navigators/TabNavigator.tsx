@@ -1,6 +1,6 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, View, Platform} from 'react-native';
 import Home from '../screens/Home';
 import Cart from '../screens/Cart';
 import Category from '../screens/Category';
@@ -108,6 +108,17 @@ const styles = StyleSheet.create({
     borderTopWidth: 0,
     elevation: 0,
     borderTopColor: 'transparent',
+    ...Platform.select({
+      ios: {
+        shadowColor: '#e2e2e2',
+        shadowOffset: {width: 0, height: -5},
+        shadowOpacity: 0.5,
+        shadowRadius: 20,
+      },
+      android: {
+        elevation: 10,
+      },
+    }),
   },
   iconBg: {
     height: 40,

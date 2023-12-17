@@ -16,11 +16,7 @@ const Item: React.FC<CategoryListProps> = ({name, bgColor, image}) => (
 const CategoryList = () => {
   return (
     <View>
-      <ScrollView
-        horizontal={true}
-        // nestedScrollEnabled={true}
-        // scrollEnabled={true}
-      >
+      <ScrollView showsHorizontalScrollIndicator={false} horizontal={true}>
         {categoryList.map(item => (
           <View style={styles.card}>
             <Item key={item.id} {...item} />
