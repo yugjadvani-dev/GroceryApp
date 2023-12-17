@@ -6,6 +6,7 @@ import {
   Text,
   FlatList,
   Image,
+  TouchableOpacity,
 } from 'react-native';
 import Search from '../components/Search';
 import {color, fontFamily} from '../assets/styles/GlobalStyles';
@@ -28,14 +29,13 @@ const Item = ({name, image, bgColor}: CategoryListProps) => (
 );
 
 const Category: React.FC = () => {
-  const [category, setCategory] = React.useState('All');
+  const [selectedCategory, setSelectedCategory] =
+    React.useState<string>('All Category');
 
-  const handleCategoryChange = category => setCategory(category);
-
-  const categoryFilterData = categoryList.filter(para => {
-    if (category === 'All') return true;
-    else return para.type === category;
-  });
+  const filteredCategoryList = categoryList.filter(
+    item =>
+      selectedCategory === 'All Category' || item.type === selectedCategory,
+  );
 
   return (
     <View style={styles.container}>
@@ -43,20 +43,27 @@ const Category: React.FC = () => {
 
       <ScrollView horizontal={true}>
         {categoryTypes.map(item => (
-          <>
-            <Text style={[styles.category]} key={item}>
-              {' '}
-              {item}
-            </Text>
-            {/* <View style={styles.activeDots} /> */}
-          </>
+          <TouchableOpacity
+            key={item}
+            onPress={() => setSelectedCategory(item)}>
+            <View style={styles.wrapper}>
+              <Text
+                style={[
+                  styles.category,
+                  item === selectedCategory && styles.active,
+                ]}>
+                {item}
+              </Text>
+              {item === selectedCategory && <View style={styles.activeDots} />}
+            </View>
+          </TouchableOpacity>
         ))}
       </ScrollView>
 
       <View style={styles.cardContainer}>
         <FlatList
           numColumns={2}
-          data={categoryList}
+          data={filteredCategoryList}
           keyExtractor={item => item.id}
           renderItem={({item}) => <Item {...item} />}
         />
@@ -72,7 +79,6 @@ const styles = StyleSheet.create({
     padding: 15,
   },
   cardContainer: {
-    // flex: 1,
     justifyContent: 'space-between',
   },
   category: {
@@ -81,6 +87,11 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: '600',
     paddingLeft: 13,
+    marginBottom: 2,
+  },
+  wrapper: {
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   active: {
     color: '#3D3014',
@@ -97,6 +108,8 @@ const styles = StyleSheet.create({
     width: '47%',
     marginRight: 20,
     marginBottom: 15,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   image: {
     marginBottom: 12,
