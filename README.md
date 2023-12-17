@@ -1,3 +1,6 @@
+![Page Home](https://github.com/yugjadvani-dev/GroceryApp/assets/110123287/25f620d0-c73f-490e-9300-e8ff860c5362)
+![Category](https://github.com/yugjadvani-dev/GroceryApp/assets/110123287/7418146d-0e92-45a2-94c9-fd50de4709bb)
+
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
 # Getting Started
